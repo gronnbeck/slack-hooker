@@ -5,7 +5,7 @@ var path = require('path');
 
 var paths = {
   less: './app/less/**/*.less',
-  script: './app/src/**/*.js'
+  script: './app/js/**/*.js'
 }
 
 gulp.task('less', function () {
@@ -31,6 +31,11 @@ gulp.task('watch', function() {
 gulp.task('mithril', function() {
   gulp.src('./node_modules/mithril/mithril.js')
   .pipe(gulp.dest('./public/js'))
+});
+
+gulp.task('lodash', function() {
+  gulp.src('./node_modules/lodash/dist/lodash.js')
+  .pipe(gulp.dest('./public/js'))
 })
 
-gulp.task('default', ['less', 'scripts', 'mithril']);
+gulp.task('default', ['less', 'scripts', 'mithril', 'lodash']);
