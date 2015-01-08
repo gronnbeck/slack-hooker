@@ -1,11 +1,13 @@
 var express = require('express');
-var bodyParser = require('body-parser')
-var mongoose = require('mongoose');
+var bodyParser = require('body-parser');
+var basicAuth = require('./lib/basic-auth');
 var hooks = require('./hooks');
+var mongoose = require('mongoose');
 var app = express();
 
 mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/slack-hooker');
 
+app.use(basicAuth(['/hook/slack']));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/hook', hooks);

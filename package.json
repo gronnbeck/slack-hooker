@@ -11,6 +11,7 @@
   "author": "Ken Grønnbeck",
   "license": "ISC",
   "dependencies": {
+    "basic-auth": "^1.0.0",
     "body-parser": "^1.10.1",
     "express": "^4.10.7",
     "gulp-less": "^2.0.1",
