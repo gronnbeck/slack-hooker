@@ -11,7 +11,6 @@ app.use(basicAuth(['/hook/slack']));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/hook', hooks);
-app.use('/js', express.static(__dirname + '/build/js'));
 app.use('/', express.static(__dirname + '/public'));
 
 var server = app.listen(process.env.PORT || 8000, function() {
