@@ -23,6 +23,11 @@ gulp.task('scripts', function () {
   .pipe(gulp.dest('./public/js'));
 });
 
+gulp.task('templates', function() {
+  gulp.src('./templates/**/*')
+  .pipe(gulp.dest('./public'))
+});
+
 gulp.task('watch', function() {
   gulp.watch(paths.less, ['less']);
   gulp.watch(paths.script, ['scripts']);
@@ -36,6 +41,6 @@ gulp.task('mithril', function() {
 gulp.task('lodash', function() {
   gulp.src('./node_modules/lodash/dist/lodash.js')
   .pipe(gulp.dest('./public/js'))
-})
+});
 
-gulp.task('default', ['less', 'scripts', 'mithril', 'lodash']);
+gulp.task('default', ['less', 'scripts', 'templates', 'mithril', 'lodash']);
