@@ -1,0 +1,32 @@
+@import "./utils/clearfix";
+
+.messagebox {
+  display: block;
+  margin: 0 auto;
+  overflow-x: scroll;
+  width: 80%;
+}
+.message {
+  display: block;
+  min-width: 100%;
+  white-space: nowrap;
+}
+.message__comp {
+  display: inline-block;
+  float: left;
+  margin-right: 2%;
+}
+.message__comp:last-child {
+  margin-right: 0;
+}
+.message__comp.timestamp {
+  overflow: hidden;
+  width: 10%;
+}
+.message__comp.username {
+  overflow: hidden;
+  width: 10%;
+}
+.message__comp.text {
+  width: 70%;
+}

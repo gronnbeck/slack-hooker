@@ -1,14 +1,10 @@
 var _ = require('lodash');
 var allowedSeperatorChars = [".", ":", "-"];
-var messageModel = require("./models/Message");
+
 
 exports.handler = function (args) {
 	var start = setDate(args[0]);
 	var end = setDate(args[1]);
-
-	messageModel.find({}).find(function(err, messages) {
-		
-	});
 }
 
 function setDate(time) {
