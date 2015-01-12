@@ -3,7 +3,6 @@ var bodyParser = require('body-parser');
 var basicAuth = require('./lib/basic-auth');
 var hooks = require('./hooks');
 var mongoose = require('mongoose');
-var messageModel = require('./models/Message');
 var saveHandler = require('./saveHandler');
 var timeSaver = require('./timeSaver');
 var lineSaver = require('./lineSaver');
