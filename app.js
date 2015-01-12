@@ -1,17 +1,28 @@
 var express = require('express');
 var bodyParser = require('body-parser')
 var mongoose = require('mongoose');
+var messageModel = require('./models/Message');
+var saveHandler = require('./saveHandler');
+var timeSaver = require('./timeSaver');
+var lineSaver = require('./lineSaver');
 var app = express();
+
+saveHandler.setCommands([
+  {
+    "flag": "t", 
+    "handler": timeSaver.handler,
+    "descriptor": "TIME"
+  },
+  { 
+    "flag": "l",
+    "handler": lineSaver.handler,
+    "descriptor": "LINE"
+  },
+]);
 
 mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/slack-hooker');
 
-var Message = mongoose.model('Message', {
-  channel_name: String,
-  timestamp: String,
-  user_id: String,
-  user_name: String,
-  text: String
-});
+var Message = messageModel;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -20,6 +31,10 @@ app.post('/hook/slack', function(req, res) {
 
   var body = req.body;
   var token = body.token;
+  var message = body.text
+  if(saveHandler.isSaveCommand(message)) {
+    saveHandler.handleSaveCommand(message);
+  }
 
   if (token !== process.env.SLACK_TOKEN) {
     return res
@@ -48,7 +63,7 @@ app.post('/hook/slack', function(req, res) {
 });
 
 app.get('/hook/slack', function(req, res) {
-  Message
+    Message
     .find({})
     .find(function(err, messages) {
       if (err) {
