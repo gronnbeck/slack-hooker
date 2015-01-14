@@ -15,16 +15,16 @@ app.post('/slack', function(req, res) {
 
   var body = req.body;
   var token = body.token;
-  var message = body.text;
 
+  // if (token !== "lol") {
   if (token !== process.env.SLACK_TOKEN) {
     return res
     .status(500)
     .send({success: false, message: 'wrong token'})
   }
 
-  if(saveHandler.isSaveCommand(message)) {
-    saveHandler.handleSaveCommand(message);
+  if(saveHandler.isSaveCommand(body.text)) {
+    saveHandler.handleSaveCommand(body);
   }
 
   var message = new Message({

@@ -19,7 +19,8 @@ exports.setCommands = function (allowedCommands) {
 	});
 }
 
-exports.handleSaveCommand = function(msg) {
+exports.handleSaveCommand = function(saveRequest) {
+	var msg = saveRequest.text;
 	var array  = msg.split("-");
 	array.shift();
 	_.forEach(array, function(strValue) {
@@ -29,7 +30,7 @@ exports.handleSaveCommand = function(msg) {
 			return;
 		}
 		arguments.shift();
-		command.handler(arguments);
+		command.handler(arguments, saveRequest);
 	})
 }
 
