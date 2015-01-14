@@ -1,11 +1,27 @@
 var _ = require('lodash');
 var allowedSeperatorChars = [".", ":", "-"];
+var FunnySegment = require('../models/FunnySegments');
 
-
-exports.handler = function (args) {
+exports.handler = function (args, saveRequest) {
 	var start = setDate(args[0]);
 	var end = setDate(args[1]);
-	console.log(start, "-", end);
+
+	var segment = new FunnySegment({
+		type:"TIME",
+		user_name: saveRequest.user_name,
+		user_id: saveRequest.user_id,
+		start: start,
+		end: end
+	});
+
+	segment.save(function(err) {
+		if (err) {
+			console.log("ERROR SAVING TIME segment");
+		}
+		else {
+			console.log("SUCCESS SAVING TIME SEGMENT");
+		}
+	});
 	
 }
 
