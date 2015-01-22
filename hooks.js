@@ -16,7 +16,6 @@ app.post('/slack', function(req, res) {
   var body = req.body;
   var token = body.token;
 
-  // if (token !== "lol") {
   if (token !== process.env.SLACK_TOKEN) {
     return res
     .status(500)

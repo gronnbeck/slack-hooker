@@ -3,26 +3,11 @@ var bodyParser = require('body-parser');
 var basicAuth = require('./lib/basic-auth');
 var hooks = require('./hooks');
 var mongoose = require('mongoose');
-var saveHandler = require('./saveHandler');
-var timeSaver = require('./save-handlers/timeSaver');
-var lineSaver = require('./save-handlers/lineSaver');
 var app = express();
-
-
-saveHandler.setCommands([
-  {
-    "flag": "t", 
-    "handler": timeSaver.handler,
-    "descriptor": "TIME"
-  },
-  { 
-    "flag": "l",
-    "handler": lineSaver.handler,
-    "descriptor": "LINE"
-  },
-]);
+var config = require('./config/config');
 
 mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/slack-hooker');
+config.setUpCommands();
 
 app.use(basicAuth(['/hook/slack']));
 app.use(bodyParser.json());

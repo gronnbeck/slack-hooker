@@ -1,5 +1,6 @@
 var _ = require('lodash');
 var saveCommand = "$save";
+var Commands = require('./utils/Commands');
 var commands;
 
 
@@ -30,23 +31,13 @@ exports.handleSaveCommand = function(saveRequest) {
 			return;
 		}
 		arguments.shift();
-		command.handler(arguments, saveRequest);
+		var respons = command.handler(arguments, saveRequest);
+		if (respons) {
+			console.log("An error happend", respons);
+		}
 	})
 }
 
-var Commands = function() {
-	this.commands = {};
-}
 
-Commands.prototype.addCommand = function(obj) {
-	this.commands[obj.descriptor] = {
-		"flag": obj.flag,
-		"handler": obj.handler
-	}
-}
-
-Commands.prototype.getCommand = function(command) {
-	return _.find(this.commands, {"flag":command});
-}
 
 
