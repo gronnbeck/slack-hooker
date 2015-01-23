@@ -4,8 +4,10 @@ var basicAuth = require('./lib/basic-auth');
 var hooks = require('./hooks');
 var mongoose = require('mongoose');
 var app = express();
+var config = require('./config/config');
 
 mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/slack-hooker');
+config.setUpCommands();
 
 app.use(basicAuth(['/hook/slack']));
 app.use(bodyParser.json());

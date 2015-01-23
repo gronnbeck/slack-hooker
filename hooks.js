@@ -1,5 +1,6 @@
 var express = require('express');
 var mongoose = require('mongoose');
+var saveHandler = require('./saveHandler')
 var app = express();
 
 var Message = mongoose.model('Message', {
@@ -19,6 +20,10 @@ app.post('/slack', function(req, res) {
     return res
     .status(500)
     .send({success: false, message: 'wrong token'})
+  }
+
+  if(saveHandler.isSaveCommand(body.text)) {
+    saveHandler.handleSaveCommand(body);
   }
 
   var message = new Message({
