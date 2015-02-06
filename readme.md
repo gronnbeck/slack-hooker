@@ -11,7 +11,7 @@ A simple way of storing slack logs out side of slack. Neat.
 
 ##Commands
 
- ###Time
+###Time
  $save -t from to
  ex:
  $save -t 10:29 10:49
@@ -19,7 +19,7 @@ A simple way of storing slack logs out side of slack. Neat.
 
  PS. Only works for current day. Looking to make with specific day aswell.
 
- ###Previous lines
+###Previous lines
  $save -l nrOfLinesBackwards
  ex:
  $save -l 5
