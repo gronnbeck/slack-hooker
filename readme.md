@@ -9,7 +9,7 @@ A simple way of storing slack logs out side of slack. Neat.
  * Highligths mashup mode
  * Highlight of the month, year, decade, etc. 
 
- ##Commands
+##Commands
 
  ###Time
  $save -t from to
