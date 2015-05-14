@@ -10,7 +10,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "gulp": "gulp",
     "watch": "gulp watch",
-    "postinstall": "gulp"
+    "postinstall": "npm run gulp"
   },
   "author": "Ken Grønnbeck",
   "license": "ISC",
@@ -18,14 +18,14 @@
     "basic-auth": "^1.0.0",
     "body-parser": "^1.10.1",
     "express": "^4.10.7",
-    "gulp": "^3.8.10",
+    "gulp": "^3.8.11",
     "gulp-less": "^2.0.1",
     "gulp-sourcemaps": "^1.3.0",
     "lodash": "^2.4.2",
     "mithril": "^0.1.28",
     "mongoose": "^3.8.21",
-    "tape": "^3.2.0",
     "q": "^1.4.0",
-    "superagent": "^1.2.0"
+    "superagent": "^1.2.0",
+    "tape": "^3.2.0"
   }
 }
