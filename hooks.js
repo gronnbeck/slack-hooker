@@ -32,11 +32,12 @@ function throttle(tasks, noOfConcurrentTasks) {
   })
 }
 
+var WEBHOOK_KEY = process.env.WEBHOOK_KEY;
 function RequestTask (url, data) {
   this.execute = function() {
     var def = Q.defer();
 
-    request.post(url)
+    request.post(url + '?key=' + WEBHOOK_KEY)
       .send(data)
       .set('Content-Type', 'application/json')
       .end(function(err) {
