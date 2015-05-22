@@ -1,6 +1,7 @@
 var saveHandler = require('../saveHandler');
 var timeSaver = require('../lib/save-handlers/timeSaver');
 var lineSaver = require('../lib/save-handlers/lineSaver');
+var minutesSaver = require('../lib/save-handlers/minutesSaver');
 
 
 exports.setUpCommands = function () {
@@ -15,5 +16,10 @@ exports.setUpCommands = function () {
 	    "handler": lineSaver.handler,
 	    "descriptor": "LINE"
 	  },
+	  {
+	  	"flag": "m",
+	  	"handler": minutesSaver.handler,
+	  	"descriptor": "MINUTES"
+	  }
 	]);
 }
