@@ -18,7 +18,7 @@ exports.setUpCommands = function () {
 	  },
 	  {
 	  	"flag": "m",
-	  	"handler": minuteSaver.handler,
+	  	"handler": minutesSaver.handler,
 	  	"descriptor": "MINUTES"
 	  }
 	]);
