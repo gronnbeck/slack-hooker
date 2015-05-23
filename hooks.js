@@ -4,8 +4,8 @@ var _ = require('lodash');
 var Q = require('q');
 var request = require('superagent');
 var Webhook = require('./lib/webhook');
-var saveHandler = require('./saveHandler')
 var app = express();
+var FunnySegment = require('./models/FunnySegments');
 
 function throttleExecute(task, tasks) {
   task.execute()
@@ -82,10 +82,6 @@ app.post('/slack', function(req, res) {
     .send({success: false, message: 'wrong token'})
   }
 
-  if(saveHandler.isSaveCommand(body.text)) {
-    saveHandler.handleSaveCommand(body);
-  }
-
   var message = new Message({
     channel_name: body.channel_name,
     timestamp: body.timestamp,
@@ -104,6 +100,37 @@ app.post('/slack', function(req, res) {
     res.send({ success: true });
 
     runWebhooks(message);
+  });
+});
+
+app.post('/slack/save', function(req, res) {
+
+  var body = req.body;
+  var token = body.token;
+
+  if (token !== process.env.SLACK_TOKEN) {
+    return res
+    .status(500)
+    .send({success: false, message: 'wrong token'})
+  }
+
+  var segment = new FunnySegment({
+    type:body.type,
+    channel: body.channel_name,
+    user_name: body.user_name,
+    user_id: body.user_id,
+    start: body.start ? body.start : body.timestamp,
+    end: body.end
+  });
+
+  segment.save(function(err) {
+    if (err) {
+      console.log(err);
+      res.status(500).send({ success: false, error: err });    
+    }
+    else {
+      res.send({ success: true });    
+    }
   });
 });
 
