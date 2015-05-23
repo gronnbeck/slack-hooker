@@ -11,4 +11,4 @@ A simple way of storing slack logs out side of slack. Neat.
 
 ##Commands
 
-Ask your bot for "save"
+Ask your bot for help. Check the save command
