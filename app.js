@@ -1,7 +1,6 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var basicAuth = require('./lib/basic-auth');
-var hooks = require('./hooks');
 var saveHook = require('./hooks/save-hook');
 var slackHook = require('./hooks/slack-hook');
 var webAppApi = require('./routes/routes');
