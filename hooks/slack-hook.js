@@ -1,11 +1,10 @@
 var express = require('express');
-var mongoose = require('mongoose');
 var _ = require('lodash');
 var Q = require('q');
 var request = require('superagent');
-var Webhook = require('./lib/webhook');
-var saveHandler = require('./saveHandler')
+var Webhook = require('../lib/webhook');
 var app = express();
+var Message = require('../models/Message');
 
 function throttleExecute(task, tasks) {
   task.execute()
@@ -63,14 +62,6 @@ function runWebhooks (data) {
   });
 }
 
-var Message = mongoose.model('Message', {
-  channel_name: String,
-  timestamp: String,
-  user_id: String,
-  user_name: String,
-  text: String
-});
-
 app.post('/slack', function(req, res) {
 
   var body = req.body;
@@ -80,10 +71,6 @@ app.post('/slack', function(req, res) {
     return res
     .status(500)
     .send({success: false, message: 'wrong token'})
-  }
-
-  if(saveHandler.isSaveCommand(body.text)) {
-    saveHandler.handleSaveCommand(body);
   }
 
   var message = new Message({
@@ -104,20 +91,6 @@ app.post('/slack', function(req, res) {
     res.send({ success: true });
 
     runWebhooks(message);
-  });
-});
-
-app.get('/slack', function(req, res) {
-  Message
-  .find({})
-  .find(function(err, messages) {
-    if (err) {
-      return res
-      .status(500)
-      .send({success: false});
-    }
-    return res
-    .send({success: true, messages: messages })
   });
 });
 
