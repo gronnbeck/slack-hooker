@@ -7,7 +7,7 @@ var MessageView = function(message) {
 }
 
 var message = function() {
-  var model = m.request({ method: 'GET', url: '/hook/slack'});
+  var model = m.request({ method: 'GET', url: '/log'});
   return {
     controller: function () {
       return {

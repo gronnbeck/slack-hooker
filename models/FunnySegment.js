@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 
-var FunnySegments = mongoose.model('FunnySegments', {
+var FunnySegment = mongoose.model('FunnySegment', {
   type: String,
   channel: String,
   user_name: String,
@@ -9,4 +9,4 @@ var FunnySegments = mongoose.model('FunnySegments', {
   end: String
 });
 
-module.exports = FunnySegments;
+module.exports = FunnySegment;
