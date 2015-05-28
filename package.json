@@ -9,7 +9,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "gulp": "gulp",
-    "watch": "gulp watch"
+    "watch": "gulp watch",
+    "postinstall": "gulp"
   },
   "author": "Ken Grønnbeck",
   "license": "ISC",
